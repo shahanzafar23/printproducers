@@ -23,6 +23,11 @@ public abstract class Consumer extends Thread{
                         e.printStackTrace();
                     }
                 }
+                try {
+                    sleep(getInternal());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 int number = ((LinkedList<Integer>) stack).removeLast();
                 consume(number);
                 stack.notifyAll();
