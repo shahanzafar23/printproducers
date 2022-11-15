@@ -1,6 +1,7 @@
 package com.printer.consumer;
 
 import java.util.List;
+import java.util.Random;
 
 public class PrinterConsumer extends Consumer{
     public PrinterConsumer(List<Integer> s) {
@@ -13,7 +14,12 @@ public class PrinterConsumer extends Consumer{
     }
 
     @Override
+    public long getPrintWindow() {
+        return new Random().nextInt(3000);
+    }
+
+    @Override
     public int getInternal() {
-        return 500;
+        return new Random().nextInt(5000);
     }
 }

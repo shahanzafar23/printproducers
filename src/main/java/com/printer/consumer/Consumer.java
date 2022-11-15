@@ -13,29 +13,29 @@ public abstract class Consumer extends Thread{
     @Override
     public void run() {
         while(true){
-            synchronized (stack) {
-                while(stack.isEmpty())
-                {
-                    try{
-                        stack.wait();
-                    } catch(Exception e)
+            long endWindow = System.currentTimeMillis() + getPrintWindow();
+            System.out.println("Consumer Working.....");
+            while(System.currentTimeMillis() < endWindow){
+                synchronized (stack) {
+                    if(!stack.isEmpty())
                     {
-                        e.printStackTrace();
+                        int number = ((LinkedList<Integer>) stack).removeLast();
+                        consume(number);
                     }
                 }
-                try {
-                    sleep(getInternal());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                int number = ((LinkedList<Integer>) stack).removeLast();
-                consume(number);
-                stack.notifyAll();
+            }
+            System.out.println("Consumer ended going to sleep.....");
+            try {
+                sleep(getInternal());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
 
     public abstract void consume(int num);
+
+    public abstract long getPrintWindow();
 
     public abstract int getInternal();
 }

@@ -14,14 +14,13 @@ public abstract class Producer extends Thread{
     public void run() {
         while (true) {
             synchronized (stack) {
-                try {
-                    sleep(getInternal());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 num = produceNum(num);
                 stack.add(num);
-                stack.notifyAll();
+            }
+            try {
+                sleep(getInternal());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }

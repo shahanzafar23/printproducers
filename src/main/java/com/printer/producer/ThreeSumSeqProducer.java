@@ -3,6 +3,7 @@ package com.printer.producer;
 import com.printer.producer.Producer;
 
 import java.util.List;
+import java.util.Random;
 
 public class ThreeSumSeqProducer extends Producer {
     public ThreeSumSeqProducer(List<Integer> s) {
@@ -17,6 +18,6 @@ public class ThreeSumSeqProducer extends Producer {
 
     @Override
     public int getInternal() {
-        return 100;
+        return new Random().nextInt(3000);
     }
 }

@@ -1,6 +1,7 @@
 package com.printer.producer;
 
 import java.util.List;
+import java.util.Random;
 
 public class FiveSumSeqProducer extends Producer {
     public FiveSumSeqProducer(List<Integer> s) {
@@ -15,6 +16,6 @@ public class FiveSumSeqProducer extends Producer {
 
     @Override
     public int getInternal() {
-        return 150;
+        return new Random().nextInt(3000);
     }
 }
